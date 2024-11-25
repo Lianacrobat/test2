@@ -1,1 +1,160 @@
-<h1>testing</h1>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+
+<body>
+  <div class="padre">
+    <div class="header">
+      <h1>Aplikeishon</h1>
+      <button class="toggle-mode" onclick="toggleMode()">🌑</button>
+    </div>
+    <div class="body">
+      <div class="aside">
+        <!-- Tools dynamically updated -->
+      </div>
+      <div class="contenido">
+        <section id="A-1" class="active">Contenido de la herramienta A-1</section>
+        <section id="A-2">Contenido de la herramienta A-2</section>
+        <section id="A-3">Contenido de la herramienta A-3</section>
+        <section id="B-1">Contenido de la herramienta B-1</section>
+        <section id="B-2">Contenido de la herramienta B-2</section>
+        <section id="B-3">Contenido de la herramienta B-3</section>
+        <section id="C-1">Contenido de la herramienta C-1</section>
+        <section id="C-2">Contenido de la herramienta C-2</section>
+        <section id="C-3">Contenido de la herramienta C-3</section>
+        <section id="D-1">Contenido de la herramienta D-1</section>
+        <section id="D-2">Contenido de la herramienta D-2</section>
+        <section id="D-3">Contenido de la herramienta D-3</section>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer-item active" onclick="showSection('A')">
+        <span>🏠</span>
+        <span>Inicio</span>
+      </div>
+      <div class="footer-item" onclick="showSection('B')">
+        <span>📄</span>
+        <span>Documentos</span>
+      </div>
+      <div class="footer-item" onclick="showSection('C')">
+        <span>📊</span>
+        <span>Reportes</span>
+      </div>
+      <div class="footer-item" onclick="showSection('D')">
+        <span>💪</span>
+        <span>Ejercicios</span>
+      </div>
+      <div class="footer-item" onclick="showSection('E')">
+        <span>🛒</span>
+        <span>Tienda</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Theme toggling
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedMode = localStorage.getItem("theme") || "light";
+      document.body.classList.add(savedMode);
+      updateThemeButton(savedMode);
+    });
+
+    function toggleMode() {
+      const currentMode = document.body.classList.contains("light") ? "light" : "dark";
+      const newMode = currentMode === "light" ? "dark" : "light";
+
+      document.body.classList.replace(currentMode, newMode);
+      localStorage.setItem("theme", newMode);
+      updateThemeButton(newMode);
+    }
+
+    function updateThemeButton(mode) {
+      document.querySelector(".toggle-mode").textContent = mode === "light" ? "🌑" : "💡";
+    }
+
+    const toolsBySection = {
+      A: [
+        { icon: "😎", label: "Mis Datos", section: "A-1" },
+        { icon: "📄", label: "Herramienta 2", section: "A-2" },
+        { icon: "📊", label: "Herramienta 3", section: "A-3" },
+      ],
+      B: [
+        { icon: "⭐", label: "Documentos 1", section: "B-1" },
+        { icon: "⚡", label: "Documentos 2", section: "B-2" },
+        { icon: "📐", label: "Documentos 3", section: "B-3" },
+      ],
+      C: [
+        { icon: "📈", label: "Reporte 1", section: "C-1" },
+        { icon: "📉", label: "Reporte 2", section: "C-2" },
+        { icon: "📊", label: "Reporte 3", section: "C-3" },
+      ],
+      D: [
+        { icon: "🏋️‍♂️", label: "Maquinas", section: "D-1" },
+        { icon: "🏋️‍♂️", label: "Mancuernas", section: "D-2" },
+        { icon: "🧘‍♂️", label: "Cuerpo", section: "D-3" },
+      ],
+    };
+
+    const lastActiveTool = {};
+
+    function showSection(section) {
+      const aside = document.querySelector(".aside");
+      aside.innerHTML = ""; // Limpia herramientas previas
+
+      const footerItems = document.querySelectorAll(".footer .footer-item");
+      footerItems.forEach(item =>
+        item.classList.toggle("active", item.onclick.toString().includes(section))
+      );
+
+      const tools = toolsBySection[section] ?? [];
+      tools.forEach(tool => {
+        const toolDiv = document.createElement("div");
+        toolDiv.classList.add("tool");
+        toolDiv.setAttribute("data-section", tool.section);
+        toolDiv.onclick = () => selectAsideTool(section, tool.section);
+
+        const icon = document.createElement("span");
+        icon.textContent = tool.icon;
+
+        const label = document.createElement("span");
+        label.textContent = tool.label;
+
+        toolDiv.appendChild(icon);
+        toolDiv.appendChild(label);
+        aside.appendChild(toolDiv);
+      });
+
+      // Activa la primera herramienta o última seleccionada
+      const activeTool = lastActiveTool[section] || tools[0]?.section;
+      if (activeTool) selectAsideTool(section, activeTool);
+    }
+
+    function selectAsideTool(section, toolSectionId) {
+      const toolItems = document.querySelectorAll(".aside .tool");
+      toolItems.forEach(item =>
+        item.classList.toggle("active", item.getAttribute("data-section") === toolSectionId)
+      );
+
+      const contentSections = document.querySelectorAll(".contenido section");
+      contentSections.forEach(sec =>
+        sec.classList.toggle("active", sec.id === toolSectionId)
+      );
+
+      lastActiveTool[section] = toolSectionId;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      showSection("A");
+    });
+
+
+  </script>
+</body>
+
+</html>
