@@ -15,6 +15,24 @@
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
+    .logo {
+      width: 100px;
+      /* Ajusta el tamaño según tus necesidades */
+      height: 100px;
+      /* Ajusta el tamaño según tus necesidades */
+      background: linear-gradient(to right, #0091F0, #007CCE);
+      /* Degradado de derecha a izquierda */
+      display: flex;
+      /* Centra el contenido SVG */
+      justify-content: center;
+      /* Centra horizontalmente */
+      align-items: center;
+      /* Centra verticalmente */
+      border-radius: 15px;
+      /* Opcional: Bordes redondeados */
+    }
+
+
     /* Theme Colors */
     body.light {
       background-color: #fafafa;
@@ -73,7 +91,7 @@
       justify-content: flex-end;
       /* Alinea los controles a la derecha */
       align-items: center;
-      gap: 15px;
+      gap: 5px;
       /* Espacio entre los controles */
     }
 
@@ -124,7 +142,7 @@
 
     /* Component: Aside */
     .aside {
-      width: 70px;
+      width: 75px;
       background-color: #f5f5f5;
       display: flex;
       flex-direction: column;
