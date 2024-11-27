@@ -61,31 +61,61 @@
       background-color: #f5f5f5;
       color: #505050;
       display: flex;
+      justify-content: space-between;
+      /* Espacio entre la izquierda y derecha */
       align-items: center;
-      justify-content: center;
-      position: relative;
+      padding: 0 20px;
+      /* Espaciado interno */
       transition: background-color 0.3s ease;
+    }
+
+    /* Controles de idioma y tema alineados a la derecha */
+    .header-controls {
+      display: flex;
+      justify-content: flex-end;
+      /* Alinea los controles a la derecha */
+      align-items: center;
+      gap: 15px;
+      /* Espacio entre los controles */
     }
 
     body.dark .header {
       background-color: #171717;
     }
 
+    /* Logotipo y título alineados a la izquierda */
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      width: 40px;
+      /* Tamaño del logotipo */
+      height: 40px;
+      border-radius: 50%;
+      /* Hacer el logotipo redondo */
+      margin-right: 10px;
+      /* Espacio entre el logotipo y el título */
+    }
+
+    .site-title {
+      font-size: 24px;
+      color: inherit;
+    }
+
+
+    /* icono tema */
     .toggle-mode {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
       background: none;
       border: none;
       font-size: 20px;
       cursor: pointer;
       transition: transform 0.3s ease;
-      color: inherit;
     }
 
     .toggle-mode:hover {
-      transform: translateY(-50%) scale(1.2);
+      transform: scale(1.2);
     }
 
     /* Component: Body */
@@ -151,6 +181,9 @@
 
     .tool.active span:nth-child(2) {
       color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      /* Ajusta la distancia de la línea */
     }
 
     /* Component: Content */
@@ -225,8 +258,47 @@
       font-size: 10px;
       margin-top: 10px;
       color: #808080;
+
     }
 
     .footer-item.active span:nth-child(2) {
       color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      /* Ajusta la distancia de la línea */
+    }
+
+    /* Language Selector (Minimalist) */
+    .language-selector {
+      margin-left: 15px;
+      color: inherit;
+      background: none;
+      border: none;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .language-selector select {
+      background-color: #f5f5f5;
+      border: 0px solid #f0f0f0;
+      border-radius: 5px;
+      padding: 5px 10px;
+      color: #333;
+      cursor: pointer;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    body.dark .language-selector select {
+      background-color: #171717;
+      border: 1px solid #171717;
+      color: #ccc;
+    }
+
+    .language-selector select:hover {
+      border-color: #f0f0f0;
+    }
+
+    .language-selector select:focus {
+      outline: none;
+
     }
