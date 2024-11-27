@@ -37,9 +37,9 @@
 
     /* Component: Container */
     .padre {
-      width: 90%;
-      max-width: 414pt;
-      height: 90vh;
+      width: 95%;
+      max-width: 100%;
+      height: 95vh;
       max-height: 736pt;
       display: flex;
       flex-direction: column;
