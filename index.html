@@ -4,254 +4,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-        /* General Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    /* Global Styles */
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    /* Theme Colors */
-    body.light {
-      background-color: #fafafa;
-      color: #000;
-    }
-
-    body.dark {
-      background-color: #0d0d0d;
-      color: #fff;
-    }
-
-    /* Utility Classes */
-    .hidden {
-      display: none;
-    }
-
-    .active {
-      color: inherit;
-    }
-
-    /* Component: Container */
-    .padre {
-      width: 90%;
-      max-width: 414pt;
-      height: 90vh;
-      max-height: 736pt;
-      display: flex;
-      flex-direction: column;
-      background-color: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-      transition: background-color 0.3s ease;
-    }
-
-    body.dark .padre {
-      background-color: #252525;
-    }
-
-    /* Component: Header */
-    .header {
-      width: 100%;
-      height: 10%;
-      background-color: #f5f5f5;
-      color: #505050;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      transition: background-color 0.3s ease;
-    }
-
-    body.dark .header {
-      background-color: #171717;
-    }
-
-    .toggle-mode {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      font-size: 20px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      color: inherit;
-    }
-
-    .toggle-mode:hover {
-      transform: translateY(-50%) scale(1.2);
-    }
-
-    /* Component: Body */
-    .body {
-      flex: 1;
-      display: flex;
-    }
-
-    /* Component: Aside */
-    .aside {
-      width: 100px;
-      background-color: #f5f5f5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
-      overflow-y: auto;
-      transition: background-color 0.3s ease;
-    }
-
-    body.dark .aside {
-      background-color: #171717;
-    }
-
-    .tool {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 15px;
-      cursor: pointer;
-      transition: transform 0.3s ease, filter 0.3s ease;
-    }
-
-    .tool span:first-child {
-      font-size: 35px;
-      width: 35px;
-      height: 35px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      filter: grayscale(100%);
-      opacity: 50%;
-      transition: filter 0.3s ease, transform 0.3s ease;
-    }
-
-    .tool.active span:first-child {
-      filter: none;
-      opacity: 100%;
-    }
-
-    .tool span:first-child:hover {
-      transform: translateX(5px);
-    }
-
-    .tool span:nth-child(2) {
-      font-size: 10px;
-      color: #808080;
-      margin-top: 10px;
-      text-align: center;
-      word-wrap: break-word;
-      max-width: 80px;
-    }
-
-    .tool.active span:nth-child(2) {
-      color: inherit;
-    }
-
-    /* Component: Content */
-    .contenido {
-      flex: 1;
-      background-color: #fff;
-      padding: 10px;
-      overflow-y: auto;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    body.dark .contenido {
-      background-color: #1f1f1f;
-      color: #909090;
-    }
-
-    .contenido section {
-      display: none;
-    }
-
-    .contenido section.active {
-      display: block;
-    }
-
-    /* Component: Footer */
-    .footer {
-      width: 100%;
-      height: 10%;
-      background-color: #f5f5f5;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      font-size: 12px;
-      text-align: center;
-      transition: background-color 0.3s ease;
-    }
-
-    body.dark .footer {
-      background-color: #171717;
-    }
-
-    .footer-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .footer-item span:first-child {
-      font-size: 35px;
-      line-height: 35px;
-      width: 35px;
-      height: 35px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      filter: grayscale(100%);
-      opacity: 50%;
-      transition: filter 0.3s ease, transform 0.3s ease;
-    }
-
-    .footer-item.active span:first-child {
-      opacity: 100%;
-      filter: none;
-    }
-
-    .footer-item span:first-child:hover {
-      transform: translateY(-5px);
-    }
-
-    .footer-item span:nth-child(2) {
-      font-size: 10px;
-      margin-top: 10px;
-      color: #808080;
-    }
-
-    .footer-item.active span:nth-child(2) {
-      color: inherit;
-    }
-  </style>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css" />
+  <title>Aplikeishon</title>
 </head>
 
 <body>
   <div class="padre">
+
     <div class="header">
-      <h1>Aplikeishon</h1>
-      <button class="toggle-mode" onclick="toggleMode()">🌑</button>
+      <!-- Logotipo y Título -->
+      <div class="header-left">
+        <img src="/version movil/src/logo svg.png" alt="Logo" class="logo">
+        <h1 class="site-title">Aplikeishon</h1>
+      </div>
+
+      <!-- Controles de idioma y tema -->
+      <div class="header-controls">
+        <button class="toggle-mode" onclick="toggleMode()">🌑</button>
+        <div class="language-selector">
+          <select id="language-select" onchange="changeLanguage(this.value)">
+            <option value="es">ES</option>
+            <option value="en">EN</option>
+            <option value="uk">UK</option>
+            <option value="cn">CN</option>
+          </select>
+        </div>
+      </div>
     </div>
+
+
     <div class="body">
       <div class="aside">
         <!-- Tools dynamically updated -->
       </div>
       <div class="contenido">
-        <section id="A-1" class="active">Contenido de la herramienta A-1</section>
+        <section id="A-1">Contenido de la herramienta A-1</section>
         <section id="A-2">Contenido de la herramienta A-2</section>
         <section id="A-3">Contenido de la herramienta A-3</section>
         <section id="B-1">Contenido de la herramienta B-1</section>
@@ -289,62 +77,147 @@
     </div>
   </div>
 
-  <script>
-    // Theme toggling
+  <script>// Traducir toolsBySection dinámicamente
+    function getDynamicTools(lang) {
+      const translations = getTranslations(lang);
+      return {
+        A: [
+          { icon: "😎", label: translations.section_tool1, section: "A-1" },
+          { icon: "📄", label: translations.section_tool2, section: "A-2" },
+          { icon: "📊", label: translations.section_tool3, section: "A-3" },
+          { icon: "📊", label: translations.section_tool4, section: "A-4" },
+          { icon: "📊", label: translations.section_tool5, section: "A-5" },
+          { icon: "📊", label: translations.section_tool6, section: "A-6" },
+          { icon: "📊", label: translations.section_tool7, section: "A-7" },
+          { icon: "📊", label: translations.section_tool8, section: "A-8" },
+        ],
+        B: [
+          { icon: "⭐", label: translations.section_tool1, section: "B-1" },
+          { icon: "⚡", label: translations.section_tool2, section: "B-2" },
+          { icon: "📐", label: translations.section_tool3, section: "B-3" },
+          { icon: "📐", label: translations.section_tool4, section: "B-4" },
+          { icon: "📐", label: translations.section_tool5, section: "B-5" },
+          { icon: "📐", label: translations.section_tool6, section: "B-6" },
+          { icon: "📐", label: translations.section_tool7, section: "B-7" },
+          { icon: "📐", label: translations.section_tool8, section: "B-8" },
+        ],
+        C: [
+          { icon: "📈", label: translations.section_tool1, section: "C-1" },
+          { icon: "📉", label: translations.section_tool2, section: "C-2" },
+          { icon: "📊", label: translations.section_tool3, section: "C-3" },
+          { icon: "📊", label: translations.section_tool4, section: "C-4" },
+          { icon: "📊", label: translations.section_tool5, section: "C-5" },
+          { icon: "📊", label: translations.section_tool6, section: "C-6" },
+          { icon: "📊", label: translations.section_tool7, section: "C-7" },
+          { icon: "📊", label: translations.section_tool8, section: "C-8" },
+        ],
+        D: [
+          { icon: "🏋️‍♂️", label: translations.section_tool1, section: "D-1" },
+          { icon: "🏋️‍♂️", label: translations.section_tool2, section: "D-2" },
+          { icon: "🧘‍♂️", label: translations.section_tool3, section: "D-3" },
+          { icon: "🧘‍♂️", label: translations.section_tool4, section: "D-4" },
+          { icon: "🧘‍♂️", label: translations.section_tool5, section: "D-5" },
+          { icon: "🧘‍♂️", label: translations.section_tool6, section: "D-6" },
+          { icon: "🧘‍♂️", label: translations.section_tool7, section: "D-7" },
+          { icon: "🧘‍♂️", label: translations.section_tool8, section: "D-8" },
+        ],
+      };
+    }
+
+    // Cargar idioma predeterminado de localStorage o "es"
+    let currentLang = localStorage.getItem("lang") || "es";
+
+    // Cargar tema predeterminado de localStorage o "light"
+    let currentTheme = localStorage.getItem("theme") || "light";
+
+    // Últimas selecciones persistentes
+    const lastActiveTool = JSON.parse(localStorage.getItem("lastActiveTool")) || {};
+    let toolsBySection = getDynamicTools(currentLang);
+    
     document.addEventListener("DOMContentLoaded", () => {
+      loadLanguage(currentLang);
+      document.getElementById("language-select").value = currentLang;
+
       const savedMode = localStorage.getItem("theme") || "light";
       document.body.classList.add(savedMode);
       updateThemeButton(savedMode);
+
     });
 
+    function loadLanguage(lang) {
+      const translations = getTranslations(lang);
+      applyTranslations(translations);
+      localStorage.setItem("lang", lang);
+      refreshAside(lang); // Actualizar las herramientas en el aside
+    }
+
+    function refreshAside(lang) {
+      toolsBySection = getDynamicTools(lang); // Obtener herramientas dinámicas
+      const lastSection = localStorage.getItem("lastActiveSection") || "A";
+      showSection(lastSection);
+    }
+
+    function applyTranslations(translations) {
+      document.querySelector("h1").textContent = translations.app_title;
+      updateThemeButton(currentTheme);
+
+      const footerItems = document.querySelectorAll(".footer-item span:nth-child(2)");
+      const keys = ["footer_home", "footer_docs", "footer_reports", "footer_exercises", "footer_store"];
+      footerItems.forEach((item, index) => {
+        item.textContent = translations[keys[index]];
+      });
+    }
+
+    // Reemplazamos la función toggleMode para corregir el cambio de tema
     function toggleMode() {
-      const currentMode = document.body.classList.contains("light") ? "light" : "dark";
-      const newMode = currentMode === "light" ? "dark" : "light";
+  const currentTheme = localStorage.getItem("theme") || "light"; // Predeterminado a 'light'
+  const newTheme = currentTheme === "light" ? "dark" : "light";
 
-      document.body.classList.replace(currentMode, newMode);
-      localStorage.setItem("theme", newMode);
-      updateThemeButton(newMode);
-    }
+  // Aplicar el nuevo tema
+  applyTheme(newTheme);
+}
 
-    function updateThemeButton(mode) {
-      document.querySelector(".toggle-mode").textContent = mode === "light" ? "🌑" : "💡";
-    }
+// Aplicar un tema específico al body
+function applyTheme(theme) {
+  const validThemes = ["light", "dark"];
+  
+  // Validar si el tema es válido, usar "light" como predeterminado
+  if (!validThemes.includes(theme)) {
+    theme = "light";
+  }
 
-    const toolsBySection = {
-      A: [
-        { icon: "😎", label: "Mis Datos", section: "A-1" },
-        { icon: "📄", label: "Herramienta 2", section: "A-2" },
-        { icon: "📊", label: "Herramienta 3", section: "A-3" },
-      ],
-      B: [
-        { icon: "⭐", label: "Documentos 1", section: "B-1" },
-        { icon: "⚡", label: "Documentos 2", section: "B-2" },
-        { icon: "📐", label: "Documentos 3", section: "B-3" },
-      ],
-      C: [
-        { icon: "📈", label: "Reporte 1", section: "C-1" },
-        { icon: "📉", label: "Reporte 2", section: "C-2" },
-        { icon: "📊", label: "Reporte 3", section: "C-3" },
-      ],
-      D: [
-        { icon: "🏋️‍♂️", label: "Maquinas", section: "D-1" },
-        { icon: "🏋️‍♂️", label: "Mancuernas", section: "D-2" },
-        { icon: "🧘‍♂️", label: "Cuerpo", section: "D-3" },
-      ],
-    };
+  // Remover cualquier clase de tema y agregar la nueva
+  document.body.classList.remove(...validThemes);
+  document.body.classList.add(theme);
 
-    const lastActiveTool = {};
+  // Guardar el tema actual en localStorage
+  localStorage.setItem("theme", theme);
+
+  // Actualizar el texto del botón de tema
+  updateThemeButton(theme);
+}
+
+// Función para actualizar el texto del botón de tema
+function updateThemeButton(theme) {
+  const translations = getTranslations(currentLang);
+  const button = document.querySelector(".toggle-mode");
+  
+  // Cambiar el texto según el tema
+  button.textContent = theme === "light" 
+    ? translations.toggle_mode_light 
+    : translations.toggle_mode_dark;
+}
+
+
 
     function showSection(section) {
       const aside = document.querySelector(".aside");
-      aside.innerHTML = ""; // Limpia herramientas previas
+      aside.innerHTML = "";
 
-      const footerItems = document.querySelectorAll(".footer .footer-item");
-      footerItems.forEach(item =>
-        item.classList.toggle("active", item.onclick.toString().includes(section))
-      );
+      // Actualizar footer activo
+      updateFooterActive(section);
 
-      const tools = toolsBySection[section] ?? [];
+      const tools = toolsBySection[section] || [];
       tools.forEach(tool => {
         const toolDiv = document.createElement("div");
         toolDiv.classList.add("tool");
@@ -362,29 +235,118 @@
         aside.appendChild(toolDiv);
       });
 
-      // Activa la primera herramienta o última seleccionada
       const activeTool = lastActiveTool[section] || tools[0]?.section;
       if (activeTool) selectAsideTool(section, activeTool);
+
+      // Guardar la sección activa
+      localStorage.setItem("lastActiveSection", section);
+    }
+
+    function updateFooterActive(section) {
+      const footerItems = document.querySelectorAll(".footer .footer-item");
+      footerItems.forEach(item => {
+        item.classList.toggle("active", item.onclick.toString().includes(section));
+      });
     }
 
     function selectAsideTool(section, toolSectionId) {
       const toolItems = document.querySelectorAll(".aside .tool");
-      toolItems.forEach(item =>
-        item.classList.toggle("active", item.getAttribute("data-section") === toolSectionId)
-      );
+      toolItems.forEach(item => {
+        item.classList.toggle("active", item.getAttribute("data-section") === toolSectionId);
+      });
 
       const contentSections = document.querySelectorAll(".contenido section");
-      contentSections.forEach(sec =>
-        sec.classList.toggle("active", sec.id === toolSectionId)
-      );
+      contentSections.forEach(sectionElement => {
+        sectionElement.classList.toggle("active", sectionElement.id === toolSectionId);
+      });
 
+      // Guardar la última herramienta activa
       lastActiveTool[section] = toolSectionId;
+      localStorage.setItem("lastActiveTool", JSON.stringify(lastActiveTool));
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      showSection("A");
-    });
+    function changeLanguage(lang) {
+      currentLang = lang;
+      loadLanguage(lang);
+    }
 
+    function getTranslations(lang) {
+      const translations = {
+        es: {
+          app_title: "Aplicación",
+          toggle_mode_light: "🌑",
+          toggle_mode_dark: "💡",
+          footer_home: "Inicio",
+          footer_docs: "Documentos",
+          footer_reports: "Reportes",
+          footer_exercises: "Ejercicios",
+          footer_store: "Tienda",
+          section_tool1: "Mis Datos",
+          section_tool2: "Herramienta 2",
+          section_tool3: "Herramienta 3",
+          section_tool4: "Herramienta 4",
+          section_tool5: "Herramienta 5",
+          section_tool6: "Herramienta 6",
+          section_tool7: "Herramienta 7",
+          section_tool8: "Herramienta 8",
+        },
+        en: {
+          app_title: "Application",
+          toggle_mode_light: "🌑",
+          toggle_mode_dark: "💡",
+          footer_home: "Home",
+          footer_docs: "Documents",
+          footer_reports: "Reports",
+          footer_exercises: "Exercises",
+          footer_store: "Store",
+          section_tool1: "My Data",
+          section_tool2: "Tool 2",
+          section_tool3: "Tool 3",
+          section_tool4: "Tool 4",
+          section_tool5: "Tool 5",
+          section_tool6: "Tool 6",
+          section_tool7: "Tool 7",
+          section_tool8: "Tool 8",
+        },
+        uk: {
+          app_title: "Додаток",
+          toggle_mode_light: "🌑",
+          toggle_mode_dark: "💡",
+          footer_home: "Головна",
+          footer_docs: "Документи",
+          footer_reports: "Звіти",
+          footer_exercises: "Вправи",
+          footer_store: "Магазин",
+          section_tool1: "Мої Дані",
+          section_tool2: "Інструмент 2",
+          section_tool3: "Інструмент 3",
+          section_tool4: "Інструмент 4",
+          section_tool5: "Інструмент 5",
+          section_tool6: "Інструмент 6",
+          section_tool7: "Інструмент 7",
+          section_tool8: "Інструмент 8",
+        },
+        cn: {
+          app_title: "应用程序",
+          toggle_mode_light: "🌑",
+          toggle_mode_dark: "💡",
+          footer_home: "首页",
+          footer_docs: "文档",
+          footer_reports: "报告",
+          footer_exercises: "练习",
+          footer_store: "商店",
+          section_tool1: "我的数据",
+          section_tool2: "工具 2",
+          section_tool3: "工具 3",
+          section_tool4: "工具 4",
+          section_tool5: "工具 5",
+          section_tool6: "工具 6",
+          section_tool7: "工具 7",
+          section_tool8: "工具 8",
+        }
+      };
+      return translations[lang];
+    }
 
   </script>
 </body>
