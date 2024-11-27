@@ -1,317 +1,322 @@
-    /* General Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css" />
+  <title>Aplikeishon</title>
+</head>
+
+<body>
+  <div class="padre">
+
+    <div class="header">
+      <!-- Logotipo y Título -->
+      <div class="header-left">
+        <h1 class="site-title"></h1>
+      </div>
+
+
+      <!-- Controles de idioma y tema -->
+      <div class="header-controls">
+        <button class="toggle-mode" onclick="toggleMode()">🌑</button>
+        <div class="language-selector">
+          <select id="language-select" onchange="changeLanguage(this.value)">
+            <option value="es">ES</option>
+            <option value="en">EN</option>
+            <option value="uk">UK</option>
+            <option value="cn">CN</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="body">
+      <div class="aside">
+        <!-- Tools dynamically updated -->
+      </div>
+      <div class="contenido">
+        <section id="A-1">Contenido de la herramienta A-1</section>
+        <section id="A-2">Contenido de la herramienta A-2</section>
+        <section id="A-3">Contenido de la herramienta A-3</section>
+        <section id="B-1">Contenido de la herramienta B-1</section>
+        <section id="B-2">Contenido de la herramienta B-2</section>
+        <section id="B-3">Contenido de la herramienta B-3</section>
+        <section id="C-1">Contenido de la herramienta C-1</section>
+        <section id="C-2">Contenido de la herramienta C-2</section>
+        <section id="C-3">Contenido de la herramienta C-3</section>
+        <section id="D-1">Contenido de la herramienta D-1</section>
+        <section id="D-2">Contenido de la herramienta D-2</section>
+        <section id="D-3">Contenido de la herramienta D-3</section>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer-item active" onclick="showSection('A')">
+        <span>🏠</span>
+        <span>Inicio</span>
+      </div>
+      <div class="footer-item" onclick="showSection('B')">
+        <span>📄</span>
+        <span>Documentos</span>
+      </div>
+      <div class="footer-item" onclick="showSection('C')">
+        <span>📊</span>
+        <span>Reportes</span>
+      </div>
+      <div class="footer-item" onclick="showSection('D')">
+        <span>💪</span>
+        <span>Ejercicios</span>
+      </div>
+      <div class="footer-item" onclick="showSection('E')">
+        <span>🛒</span>
+        <span>Tienda</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Traducir toolsBySection dinámicamente
+    function getDynamicTools(lang) {
+      const translations = getTranslations(lang);
+      return {
+        A: [
+          { icon: "😎", label: translations.section_tool1, section: "A-1" },
+          { icon: "📄", label: translations.section_tool2, section: "A-2" },
+          { icon: "📊", label: translations.section_tool3, section: "A-3" },
+
+        ],
+        B: [
+          { icon: "⭐", label: translations.section_tool1, section: "B-1" },
+          { icon: "⚡", label: translations.section_tool2, section: "B-2" },
+          { icon: "📐", label: translations.section_tool3, section: "B-3" },
+
+        ],
+        C: [
+          { icon: "📈", label: translations.section_tool1, section: "C-1" },
+          { icon: "📉", label: translations.section_tool2, section: "C-2" },
+          { icon: "📊", label: translations.section_tool3, section: "C-3" },
+
+        ],
+        D: [
+          { icon: "🏋️‍♂️", label: translations.section_tool1, section: "D-1" },
+          { icon: "🏋️‍♂️", label: translations.section_tool2, section: "D-2" },
+          { icon: "🧘‍♂️", label: translations.section_tool3, section: "D-3" },
+
+        ],
+      };
     }
 
-    /* Global Styles */
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      transition: background-color 0.3s ease, color 0.3s ease;
+    // Cargar idioma predeterminado de localStorage o "es"
+    let currentLang = localStorage.getItem("lang") || "es";
+
+    // Cargar tema predeterminado de localStorage o "light"
+    let currentTheme = localStorage.getItem("theme") || "light";
+
+    // Últimas selecciones persistentes
+    const lastActiveTool = JSON.parse(localStorage.getItem("lastActiveTool")) || {};
+    let toolsBySection = getDynamicTools(currentLang);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadLanguage(currentLang);
+      document.getElementById("language-select").value = currentLang;
+
+      const savedMode = localStorage.getItem("theme") || "light";
+      document.body.classList.add(savedMode);
+      updateThemeButton(savedMode);
+
+    });
+
+    function loadLanguage(lang) {
+      const translations = getTranslations(lang);
+      applyTranslations(translations);
+      localStorage.setItem("lang", lang);
+      refreshAside(lang); // Actualizar las herramientas en el aside
     }
 
-    .logo {
-      width: 65px;
-      /* Ajusta el tamaño según tus necesidades */
-      height: 65px;
-      /* Ajusta el tamaño según tus necesidades */
-      background: linear-gradient(to right, #0091F0, #007CCE);
-      /* Degradado de derecha a izquierda */
-      display: flex;
-      /* Centra el contenido SVG */
-      justify-content: center;
-      /* Centra horizontalmente */
-      align-items: center;
-      /* Centra verticalmente */
-      border-radius: 50%;
-      /* Hacer el logotipo redondo */
-      margin-right: 10px;
-      /* Espacio entre el logotipo y el título */
-    }
-    .logo {
-
+    function refreshAside(lang) {
+      toolsBySection = getDynamicTools(lang); // Obtener herramientas dinámicas
+      const lastSection = localStorage.getItem("lastActiveSection") || "A";
+      showSection(lastSection);
     }
 
+    function applyTranslations(translations) {
+      document.querySelector("h1").textContent = translations.app_title;
+      updateThemeButton(currentTheme);
 
-
-    /* Theme Colors */
-    body.light {
-      background-color: #fafafa;
-      color: #000;
+      const footerItems = document.querySelectorAll(".footer-item span:nth-child(2)");
+      const keys = ["footer_home", "footer_docs", "footer_reports", "footer_exercises", "footer_store"];
+      footerItems.forEach((item, index) => {
+        item.textContent = translations[keys[index]];
+      });
     }
 
-    body.dark {
-      background-color: #0d0d0d;
-      color: #fff;
+    // Reemplazamos la función toggleMode para corregir el cambio de tema
+    function toggleMode() {
+      const currentTheme = localStorage.getItem("theme") || "light"; // Predeterminado a 'light'
+      const newTheme = currentTheme === "light" ? "dark" : "light";
+
+      // Aplicar el nuevo tema
+      applyTheme(newTheme);
     }
 
-    /* Utility Classes */
-    .hidden {
-      display: none;
+    // Aplicar un tema específico al body
+    function applyTheme(theme) {
+      const validThemes = ["light", "dark"];
+
+      // Validar si el tema es válido, usar "light" como predeterminado
+      if (!validThemes.includes(theme)) {
+        theme = "light";
+      }
+
+      // Remover cualquier clase de tema y agregar la nueva
+      document.body.classList.remove(...validThemes);
+      document.body.classList.add(theme);
+
+      // Guardar el tema actual en localStorage
+      localStorage.setItem("theme", theme);
+
+      // Actualizar el texto del botón de tema
+      updateThemeButton(theme);
     }
 
-    .active {
-      color: inherit;
-    }
+    // Función para actualizar el texto del botón de tema
+    function updateThemeButton(theme) {
+      const translations = getTranslations(currentLang);
+      const button = document.querySelector(".toggle-mode");
 
-    /* Component: Container */
-    .padre {
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background-color: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-      transition: background-color 0.3s ease;
-    }
-
-    body.dark .padre {
-      background-color: #252525;
-    }
-
-    /* Component: Header */
-    .header {
-      width: 100%;
-      height: 75px;
-      background-color: #f5f5f5;
-      color: #505050;
-      display: flex;
-      justify-content: space-between;
-      /* Espacio entre la izquierda y derecha */
-      align-items: center;
-      padding: 0 10px;
-      /* Espaciado interno */
-      transition: background-color 0.3s ease;
-    }
-
-    /* Controles de idioma y tema alineados a la derecha */
-    .header-controls {
-      display: flex;
-      justify-content: flex-end;
-      /* Alinea los controles a la derecha */
-      align-items: center;
-      gap: 5px;
-      /* Espacio entre los controles */
-    }
-
-    body.dark .header {
-      background-color: #171717;
-    }
-
-    /* Logotipo y título alineados a la izquierda */
-    .header-left {
-      display: flex;
-      align-items: center;
+      // Cambiar el texto según el tema
+      button.textContent = theme === "light"
+        ? translations.toggle_mode_light
+        : translations.toggle_mode_dark;
     }
 
 
-    .site-title {
-      font-size: 24px;
-      color: inherit;
+
+    function showSection(section) {
+      const aside = document.querySelector(".aside");
+      aside.innerHTML = "";
+
+      // Actualizar footer activo
+      updateFooterActive(section);
+
+      const tools = toolsBySection[section] || [];
+      tools.forEach(tool => {
+        const toolDiv = document.createElement("div");
+        toolDiv.classList.add("tool");
+        toolDiv.setAttribute("data-section", tool.section);
+        toolDiv.onclick = () => selectAsideTool(section, tool.section);
+
+        const icon = document.createElement("span");
+        icon.textContent = tool.icon;
+
+        const label = document.createElement("span");
+        label.textContent = tool.label;
+
+        toolDiv.appendChild(icon);
+        toolDiv.appendChild(label);
+        aside.appendChild(toolDiv);
+      });
+
+      const activeTool = lastActiveTool[section] || tools[0]?.section;
+      if (activeTool) selectAsideTool(section, activeTool);
+
+      // Guardar la sección activa
+      localStorage.setItem("lastActiveSection", section);
     }
 
-
-    /* icono tema */
-    .toggle-mode {
-      background: none;
-      border: none;
-      font-size: 20px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
+    function updateFooterActive(section) {
+      const footerItems = document.querySelectorAll(".footer .footer-item");
+      footerItems.forEach(item => {
+        item.classList.toggle("active", item.onclick.toString().includes(section));
+      });
     }
 
-    .toggle-mode:hover {
-      transform: scale(1.2);
+    function selectAsideTool(section, toolSectionId) {
+      const toolItems = document.querySelectorAll(".aside .tool");
+      toolItems.forEach(item => {
+        item.classList.toggle("active", item.getAttribute("data-section") === toolSectionId);
+      });
+
+      const contentSections = document.querySelectorAll(".contenido section");
+      contentSections.forEach(sectionElement => {
+        sectionElement.classList.toggle("active", sectionElement.id === toolSectionId);
+      });
+
+      // Guardar la última herramienta activa
+      lastActiveTool[section] = toolSectionId;
+      localStorage.setItem("lastActiveTool", JSON.stringify(lastActiveTool));
     }
 
-    /* Component: Body */
-    .body {
-      flex: 1;
-      display: flex;
+    function changeLanguage(lang) {
+      currentLang = lang;
+      loadLanguage(lang);
     }
 
-    /* Component: Aside */
-    .aside {
-      width: 75px;
-      background-color: #f5f5f5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
-      overflow-y: auto;
-      transition: background-color 0.3s ease;
+    function getTranslations(lang) {
+      const translations = {
+        es: {
+          app_title: "Aplicación",
+          toggle_mode_light: "🌑",
+          toggle_mode_dark: "💡",
+          footer_home: "Inicio",
+          footer_docs: "Documentos",
+          footer_reports: "Reportes",
+          footer_exercises: "Ejercicios",
+          footer_store: "Tienda",
+          section_tool1: "Mis Datos",
+          section_tool2: "Herramienta 2",
+          section_tool3: "Herramienta 3",
+
+        },
+        en: {
+          app_title: "Application",
+          toggle_mode_light: "🌑",
+          toggle_mode_dark: "💡",
+          footer_home: "Home",
+          footer_docs: "Documents",
+          footer_reports: "Reports",
+          footer_exercises: "Exercises",
+          footer_store: "Store",
+          section_tool1: "My Data",
+          section_tool2: "Tool 2",
+          section_tool3: "Tool 3",
+
+        },
+        uk: {
+          app_title: "Додаток",
+          toggle_mode_light: "🌑",
+          toggle_mode_dark: "💡",
+          footer_home: "Головна",
+          footer_docs: "Документи",
+          footer_reports: "Звіти",
+          footer_exercises: "Вправи",
+          footer_store: "Магазин",
+          section_tool1: "Мої Дані",
+          section_tool2: "Інструмент 2",
+          section_tool3: "Інструмент 3",
+
+        },
+        cn: {
+          app_title: "应用程序",
+          toggle_mode_light: "🌑",
+          toggle_mode_dark: "💡",
+          footer_home: "首页",
+          footer_docs: "文档",
+          footer_reports: "报告",
+          footer_exercises: "练习",
+          footer_store: "商店",
+          section_tool1: "我的数据",
+          section_tool2: "工具 2",
+          section_tool3: "工具 3",
+        }
+      };
+      return translations[lang];
     }
 
-    body.dark .aside {
-      background-color: #171717;
-    }
+  </script>
+</body>
 
-    .tool {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 15px;
-      cursor: pointer;
-      transition: transform 0.3s ease, filter 0.3s ease;
-    }
-
-    .tool span:first-child {
-      font-size: 35px;
-      width: 35px;
-      height: 35px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      filter: grayscale(100%);
-      opacity: 50%;
-      transition: filter 0.3s ease, transform 0.3s ease;
-    }
-
-    .tool.active span:first-child {
-      filter: none;
-      opacity: 100%;
-    }
-
-    .tool span:first-child:hover {
-      transform: translateX(5px);
-    }
-
-    .tool span:nth-child(2) {
-      font-size: 10px;
-      color: #808080;
-      margin-top: 10px;
-      text-align: center;
-      word-wrap: break-word;
-      max-width: 80px;
-    }
-
-    .tool.active span:nth-child(2) {
-      color: inherit;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      /* Ajusta la distancia de la línea */
-    }
-
-    /* Component: Content */
-    .contenido {
-      flex: 1;
-      background-color: #fff;
-      padding: 10px;
-      overflow-y: auto;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    body.dark .contenido {
-      background-color: #1f1f1f;
-      color: #909090;
-    }
-
-    .contenido section {
-      display: none;
-    }
-
-    .contenido section.active {
-      display: block;
-    }
-
-    /* Component: Footer */
-    .footer {
-      width: 100%;
-      height: 75px;
-      background-color: #f5f5f5;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      font-size: 12px;
-      text-align: center;
-      transition: background-color 0.3s ease;
-    }
-
-    body.dark .footer {
-      background-color: #171717;
-    }
-
-    .footer-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .footer-item span:first-child {
-      font-size: 30px;
-      line-height: 30px;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      filter: grayscale(100%);
-      opacity: 50%;
-      transition: filter 0.3s ease, transform 0.3s ease;
-    }
-
-    .footer-item.active span:first-child {
-      opacity: 100%;
-      filter: none;
-    }
-
-    .footer-item span:first-child:hover {
-      transform: translateY(-5px);
-    }
-
-    .footer-item span:nth-child(2) {
-      font-size: 10px;
-      margin-top: 10px;
-      color: #808080;
-
-    }
-
-    .footer-item.active span:nth-child(2) {
-      color: inherit;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      /* Ajusta la distancia de la línea */
-    }
-
-    /* Language Selector (Minimalist) */
-    .language-selector {
-      margin-left: 15px;
-      color: inherit;
-      background: none;
-      border: none;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-
-    .language-selector select {
-      background-color: #f5f5f5;
-      border: 0px solid #f0f0f0;
-      border-radius: 5px;
-      padding: 5px 10px;
-      color: #333;
-      cursor: pointer;
-      transition: background-color 0.3s ease, border-color 0.3s ease;
-    }
-
-    body.dark .language-selector select {
-      background-color: #171717;
-      border: 1px solid #171717;
-      color: #ccc;
-    }
-
-    .language-selector select:hover {
-      border-color: #f0f0f0;
-    }
-
-    .language-selector select:focus {
-      outline: none;
-
-    }
+</html>
