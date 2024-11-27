@@ -85,41 +85,25 @@
           { icon: "😎", label: translations.section_tool1, section: "A-1" },
           { icon: "📄", label: translations.section_tool2, section: "A-2" },
           { icon: "📊", label: translations.section_tool3, section: "A-3" },
-          { icon: "📊", label: translations.section_tool4, section: "A-4" },
-          { icon: "📊", label: translations.section_tool5, section: "A-5" },
-          { icon: "📊", label: translations.section_tool6, section: "A-6" },
-          { icon: "📊", label: translations.section_tool7, section: "A-7" },
-          { icon: "📊", label: translations.section_tool8, section: "A-8" },
+
         ],
         B: [
           { icon: "⭐", label: translations.section_tool1, section: "B-1" },
           { icon: "⚡", label: translations.section_tool2, section: "B-2" },
           { icon: "📐", label: translations.section_tool3, section: "B-3" },
-          { icon: "📐", label: translations.section_tool4, section: "B-4" },
-          { icon: "📐", label: translations.section_tool5, section: "B-5" },
-          { icon: "📐", label: translations.section_tool6, section: "B-6" },
-          { icon: "📐", label: translations.section_tool7, section: "B-7" },
-          { icon: "📐", label: translations.section_tool8, section: "B-8" },
+
         ],
         C: [
           { icon: "📈", label: translations.section_tool1, section: "C-1" },
           { icon: "📉", label: translations.section_tool2, section: "C-2" },
           { icon: "📊", label: translations.section_tool3, section: "C-3" },
-          { icon: "📊", label: translations.section_tool4, section: "C-4" },
-          { icon: "📊", label: translations.section_tool5, section: "C-5" },
-          { icon: "📊", label: translations.section_tool6, section: "C-6" },
-          { icon: "📊", label: translations.section_tool7, section: "C-7" },
-          { icon: "📊", label: translations.section_tool8, section: "C-8" },
+
         ],
         D: [
           { icon: "🏋️‍♂️", label: translations.section_tool1, section: "D-1" },
           { icon: "🏋️‍♂️", label: translations.section_tool2, section: "D-2" },
           { icon: "🧘‍♂️", label: translations.section_tool3, section: "D-3" },
-          { icon: "🧘‍♂️", label: translations.section_tool4, section: "D-4" },
-          { icon: "🧘‍♂️", label: translations.section_tool5, section: "D-5" },
-          { icon: "🧘‍♂️", label: translations.section_tool6, section: "D-6" },
-          { icon: "🧘‍♂️", label: translations.section_tool7, section: "D-7" },
-          { icon: "🧘‍♂️", label: translations.section_tool8, section: "D-8" },
+
         ],
       };
     }
@@ -133,7 +117,7 @@
     // Últimas selecciones persistentes
     const lastActiveTool = JSON.parse(localStorage.getItem("lastActiveTool")) || {};
     let toolsBySection = getDynamicTools(currentLang);
-    
+
     document.addEventListener("DOMContentLoaded", () => {
       loadLanguage(currentLang);
       document.getElementById("language-select").value = currentLang;
@@ -170,43 +154,43 @@
 
     // Reemplazamos la función toggleMode para corregir el cambio de tema
     function toggleMode() {
-  const currentTheme = localStorage.getItem("theme") || "light"; // Predeterminado a 'light'
-  const newTheme = currentTheme === "light" ? "dark" : "light";
+      const currentTheme = localStorage.getItem("theme") || "light"; // Predeterminado a 'light'
+      const newTheme = currentTheme === "light" ? "dark" : "light";
 
-  // Aplicar el nuevo tema
-  applyTheme(newTheme);
-}
+      // Aplicar el nuevo tema
+      applyTheme(newTheme);
+    }
 
-// Aplicar un tema específico al body
-function applyTheme(theme) {
-  const validThemes = ["light", "dark"];
-  
-  // Validar si el tema es válido, usar "light" como predeterminado
-  if (!validThemes.includes(theme)) {
-    theme = "light";
-  }
+    // Aplicar un tema específico al body
+    function applyTheme(theme) {
+      const validThemes = ["light", "dark"];
 
-  // Remover cualquier clase de tema y agregar la nueva
-  document.body.classList.remove(...validThemes);
-  document.body.classList.add(theme);
+      // Validar si el tema es válido, usar "light" como predeterminado
+      if (!validThemes.includes(theme)) {
+        theme = "light";
+      }
 
-  // Guardar el tema actual en localStorage
-  localStorage.setItem("theme", theme);
+      // Remover cualquier clase de tema y agregar la nueva
+      document.body.classList.remove(...validThemes);
+      document.body.classList.add(theme);
 
-  // Actualizar el texto del botón de tema
-  updateThemeButton(theme);
-}
+      // Guardar el tema actual en localStorage
+      localStorage.setItem("theme", theme);
 
-// Función para actualizar el texto del botón de tema
-function updateThemeButton(theme) {
-  const translations = getTranslations(currentLang);
-  const button = document.querySelector(".toggle-mode");
-  
-  // Cambiar el texto según el tema
-  button.textContent = theme === "light" 
-    ? translations.toggle_mode_light 
-    : translations.toggle_mode_dark;
-}
+      // Actualizar el texto del botón de tema
+      updateThemeButton(theme);
+    }
+
+    // Función para actualizar el texto del botón de tema
+    function updateThemeButton(theme) {
+      const translations = getTranslations(currentLang);
+      const button = document.querySelector(".toggle-mode");
+
+      // Cambiar el texto según el tema
+      button.textContent = theme === "light"
+        ? translations.toggle_mode_light
+        : translations.toggle_mode_dark;
+    }
 
 
 
@@ -284,11 +268,7 @@ function updateThemeButton(theme) {
           section_tool1: "Mis Datos",
           section_tool2: "Herramienta 2",
           section_tool3: "Herramienta 3",
-          section_tool4: "Herramienta 4",
-          section_tool5: "Herramienta 5",
-          section_tool6: "Herramienta 6",
-          section_tool7: "Herramienta 7",
-          section_tool8: "Herramienta 8",
+
         },
         en: {
           app_title: "Application",
@@ -302,11 +282,7 @@ function updateThemeButton(theme) {
           section_tool1: "My Data",
           section_tool2: "Tool 2",
           section_tool3: "Tool 3",
-          section_tool4: "Tool 4",
-          section_tool5: "Tool 5",
-          section_tool6: "Tool 6",
-          section_tool7: "Tool 7",
-          section_tool8: "Tool 8",
+
         },
         uk: {
           app_title: "Додаток",
@@ -320,11 +296,7 @@ function updateThemeButton(theme) {
           section_tool1: "Мої Дані",
           section_tool2: "Інструмент 2",
           section_tool3: "Інструмент 3",
-          section_tool4: "Інструмент 4",
-          section_tool5: "Інструмент 5",
-          section_tool6: "Інструмент 6",
-          section_tool7: "Інструмент 7",
-          section_tool8: "Інструмент 8",
+
         },
         cn: {
           app_title: "应用程序",
@@ -338,11 +310,6 @@ function updateThemeButton(theme) {
           section_tool1: "我的数据",
           section_tool2: "工具 2",
           section_tool3: "工具 3",
-          section_tool4: "工具 4",
-          section_tool5: "工具 5",
-          section_tool6: "工具 6",
-          section_tool7: "工具 7",
-          section_tool8: "工具 8",
         }
       };
       return translations[lang];
