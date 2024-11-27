@@ -16,9 +16,9 @@
     }
 
     .logo {
-      width: 75px;
+      width: 65px;
       /* Ajusta el tamaño según tus necesidades */
-      height: 75px;
+      height: 65px;
       /* Ajusta el tamaño según tus necesidades */
       background: linear-gradient(to right, #0091F0, #007CCE);
       /* Degradado de derecha a izquierda */
@@ -86,7 +86,7 @@
       justify-content: space-between;
       /* Espacio entre la izquierda y derecha */
       align-items: center;
-      padding: 0 20px;
+      padding: 0 10px;
       /* Espaciado interno */
       transition: background-color 0.3s ease;
     }
