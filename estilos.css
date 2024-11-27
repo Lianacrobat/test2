@@ -16,9 +16,9 @@
     }
 
     .logo {
-      width: 100px;
+      width: 75px;
       /* Ajusta el tamaño según tus necesidades */
-      height: 100px;
+      height: 75px;
       /* Ajusta el tamaño según tus necesidades */
       background: linear-gradient(to right, #0091F0, #007CCE);
       /* Degradado de derecha a izquierda */
@@ -28,9 +28,15 @@
       /* Centra horizontalmente */
       align-items: center;
       /* Centra verticalmente */
-      border-radius: 15px;
-      /* Opcional: Bordes redondeados */
+      border-radius: 50%;
+      /* Hacer el logotipo redondo */
+      margin-right: 10px;
+      /* Espacio entre el logotipo y el título */
     }
+    .logo {
+
+    }
+
 
 
     /* Theme Colors */
@@ -105,15 +111,6 @@
       align-items: center;
     }
 
-    .logo {
-      width: 40px;
-      /* Tamaño del logotipo */
-      height: 40px;
-      border-radius: 50%;
-      /* Hacer el logotipo redondo */
-      margin-right: 10px;
-      /* Espacio entre el logotipo y el título */
-    }
 
     .site-title {
       font-size: 24px;
